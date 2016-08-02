@@ -1,14 +1,14 @@
 var StateMachine = function(config) {
-	var state = 0;  // Default state.
-	var data = {};
+    var state = 0;  // Default state.
+    var data = {};
 
-	var finalStateReached = false;
-	var success = false;
+    var finalStateReached = false;
+    var success = false;
     var failure = false;
 
-	var entryActionHandlers = {};
-	var exitActionHandlers = {};
-	var transitionActionHandlers = {};
+    var entryActionHandlers = {};
+    var exitActionHandlers = {};
+    var transitionActionHandlers = {};
 
     var self = this;
 
@@ -16,15 +16,15 @@ var StateMachine = function(config) {
     /**
      * Final state handlers.
      */
-	var failureHandler = function() {
+    var failureHandler = function() {
         finalStateReached = true;
         failure = true;
-	};
+    };
 
-	var successHandler = function() {
-	    finalStateReached = true;
-	    success = true;
-	};
+    var successHandler = function() {
+    	finalStateReached = true;
+	success = true;
+    };
 
     var triggerFinal = function() {
         if (success) {
@@ -101,9 +101,7 @@ var StateMachine = function(config) {
             var newState = stateTransitionTable[inputCode][state];
 
             if(state != newState) {
-                //exitAction(inputCode);
                 transitionAction.call(this, inputCode, stateTransitionTable[inputCode][state]);
-                //entryAction.call(this, inputCode);
             }
         } else {
             console.log("Final state already reached!");
